@@ -1,39 +1,39 @@
 services:
-  # producer:
-  #   image: producer
-  #   depends_on:
-  #     - api
-  #     - mongodb
-  #     - pyspark
-  #     - broker
-  #   # networks:
-  #   #   - node-network
-  #   volumes:
-  #     - ./csv_data:/code/csv_data
+  producer:
+    image: producer
+    depends_on:
+      - api
+      - mongodb
+      - pyspark
+      - broker
+    # networks:
+    #   - node-network
+    volumes:
+      - ./csv_data:/code/csv_data
 
-  # consumer:
-  #   image: consumer
-  #   depends_on:
-  #     - api
-  #     - mongodb
-  #     - pyspark
-  #     - producer
-  #     - broker
-  #   # networks:
-  #   #   - node-network
+  consumer:
+    image: consumer
+    depends_on:
+      - api
+      - mongodb
+      - pyspark
+      - producer
+      - broker
+    # networks:
+    #   - node-network
 
-  # api:
-  #   image: api
-  #   ports:
-  #     - '8001:8001'
-  #   depends_on:
-  #     - mongodb
-  #     - pyspark
-  #     - broker
-  #   # networks:
-  #   #   - node-network
-  #   volumes:
-  #     - ./csv_data:/code/csv_data
+  api:
+    image: api
+    ports:
+      - '8001:8001'
+    depends_on:
+      - mongodb
+      - pyspark
+      - broker
+    # networks:
+    #   - node-network
+    volumes:
+      - ./csv_data:/code/csv_data
 
   mongodb:
     image: mongo:4.4
