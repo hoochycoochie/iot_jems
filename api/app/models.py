@@ -28,6 +28,8 @@ class Machine(BaseModel):
     # id: str = Field(default_factory=uuid.uuid4, alias="_id")
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     # timestamp: datetime.datetime = datetime.datetime.now()
+    product_name: str
+    product_category: str
     unique_identifier = str
     createdAt: datetime = datetime.datetime.now()
     updatedAt: datetime = datetime.datetime.now()

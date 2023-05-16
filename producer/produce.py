@@ -6,6 +6,16 @@ from threading import Timer
 from confluent_kafka import Producer
 import logging
 
+# from snakebite.client import Client
+
+# HADOOP_HOST = "localhost"
+# # HADOOP_HOST='namenode'
+# client = Client(HADOOP_HOST, 9000)
+
+# for p in client.mkdir(["/demo/demo1", "/demo2"], create_parent=True):
+#     print("p", p)
+
+
 HOST = "broker:29092"
 # HOST = "localhost:9092"
 logging.basicConfig(
@@ -30,9 +40,14 @@ def receipt(err, msg):
         print(message)
 
 
-machines = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+machines = [
+    {"machine_id": 1, "product_name": "peugeot 208", "product_category": "vehicule"},
+    {"machine_id": 2, "product_name": "clio 4", "product_category": "vehicule"},
+]
 period = 5
 fields = [
+    "product_name",
+    "product_category",
     "dateHour",
     "gpsSpeed",
     "gpsSatCount",
@@ -63,48 +78,18 @@ def gen_csv():
     month = str(now.month)
     year = str(now.year)
     date_time = year + "-" + month + "-" + day + " " + hour + ":" + minute
-    machine_id = str(random.choice(machines))
+    machine = random.choice(machines)
 
+    machine_id = str(machine["machine_id"])
+    product_name = machine["product_name"]
+    product_category = machine["product_category"]
+    print("machine_id", machine_id)
+    print("product_name", product_name)
+    print("product_category", product_category)
     rows = [
         [
-            date_time
-            + ":0."
-            + str(datetime.now().microsecond),  # "2018-01-19 05:37:0.612611",
-            random.uniform(5, 8.62),  #  8.62,
-            random.randint(50, 94),  # 94,
-            random.randint(0, 131),  # 131,
-            random.randint(0, 131),  # 131,
-            random.randint(0, 1),  #  0,
-            random.randint(10, 20),  #  20,
-            random.randint(10, 20),  #  20,
-            random.randint(0, 1),  #  0,
-            random.randint(0, 1),  #  0,
-            random.randint(0, 1),  #  0,
-            random.randint(12345, 32826),  #     32826,
-            random.randint(38, 58),  #      58,
-            random.randint(12345, 32826),  #     32826,
-            random.randint(128, 894),  #    894,
-        ],
-        [
-            date_time
-            + ":0."
-            + str(datetime.now().microsecond),  # "2018-01-19 05:37:0.612611",
-            random.uniform(5, 8.62),  #  8.62,
-            random.randint(50, 94),  # 94,
-            random.randint(0, 131),  # 131,
-            random.randint(0, 131),  # 131,
-            random.randint(0, 1),  #  0,
-            random.randint(10, 20),  #  20,
-            random.randint(10, 20),  #  20,
-            random.randint(0, 1),  #  0,
-            random.randint(0, 1),  #  0,
-            random.randint(0, 1),  #  0,
-            random.randint(12345, 32826),  #     32826,
-            random.randint(38, 58),  #      58,
-            random.randint(12345, 32826),  #     32826,
-            random.randint(128, 894),  #    894,
-        ],
-        [
+            product_name,
+            product_category,
             date_time
             + ":0."
             + str(datetime.now().microsecond),  # "2018-01-19 05:37:0.612611",
@@ -143,6 +128,7 @@ def gen_csv():
 
             # writing the data rows
             csvwriter.writerows(rows)
+            # client.copyFromLocal(csv_file, "/csv_data/" + csv_file)
             TOPIC_NAME = "new_csv_kafka_topic"
             p = Producer({"bootstrap.servers": HOST})
 
@@ -150,7 +136,12 @@ def gen_csv():
             p.flush()
         except Exception as e:
             print("error", e)
-            logger.log(e)
+        # logger.log(e).debug()
+        finally:
+            # if os.path.exists(filename):
+            #     os.remove(filename)
+            #     print("file removed", filename)
+            print("ok finally")
 
 
 gen_csv()

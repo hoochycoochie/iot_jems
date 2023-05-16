@@ -1,0 +1,2 @@
+product_name;product_category;dateHour;gpsSpeed;gpsSatCount;Gear;Brake_pedal;Accel_pedal;Machine_Speed_Mesured;AST_Direction;Ast_HPMB1_Pressure_bar;Ast_HPMA_Pressure_bar;Pressure_HighPressureReturn;Pressure_HighPressure;Oil_Temperature;Ast_FrontAxleSpeed_Rpm;Pump_Speed
+peugeot 208;vehicule;2023-5-16 14:57:0.655962;7.603474927894469;55;122;82;1;18;14;0;0;0;16300;50;20110;508

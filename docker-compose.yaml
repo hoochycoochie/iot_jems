@@ -14,7 +14,7 @@ services:
   consumer:
     image: consumer
     depends_on:
-      - api
+      #- api
       - mongodb
       - pyspark
       - producer

@@ -1,5 +1,6 @@
 from confluent_kafka import Consumer
-import requests
+
+# import requests
 
 HOST = "broker:29092"
 # HOST = "localhost:9092"
@@ -26,9 +27,9 @@ def main():
             print("Error: {}".format(msg.error()))
             continue
         data = msg.value().decode("utf-8")
-        x = requests.get(f"http://localhost:8000/csv/{data}")
-        print(x.status_code)
-        print(data)
+        # x = requests.get(f"http://localhost:8000/csv/{data}")
+        # print(x.status_code)
+        print("new data", data)
 
 
 main()
