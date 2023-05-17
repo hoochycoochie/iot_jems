@@ -83,7 +83,6 @@ services:
       - node-network
     volumes:
       - ./csv_data:/code/csv_data
-
   consumer:
     image: consumer
     container_name: consumer
@@ -95,43 +94,43 @@ services:
 
     volumes:
       - ./csv_data:/code/csv_data
-    # api:
-    #   image: api
-    #   ports:
-    #     - '8001:8001'
-    #   depends_on:
-    #     - mongodb
-    #     - pyspark
-    #     - broker
-    # networks:
-    #   - node-network
-    # volumes:
-    #   - ./csv_data:/code/csv_data
+  # api:
+  #   image: api
+  #   ports:
+  #     - '8001:8001'
+  #   depends_on:
+  #     - mongodb
+  #     - pyspark
+  #     - broker
+  # networks:
+  #   - node-network
+  # volumes:
+  #   - ./csv_data:/code/csv_data
 
-    # mongodb:
-    #   image: mongo:4.4
-    #   ports:
-    #     - '27017:27017'
-    #   volumes:
-    #     #  - dbdata6:/data/db
-    #     - ./data:/data/
-    #   networks:
-    #     - node-network
+  # mongodb:
+  #   image: mongo:4.4
+  #   ports:
+  #     - '27017:27017'
+  #   volumes:
+  #     #  - dbdata6:/data/db
+  #     - ./data:/data/
+  #   networks:
+  #     - node-network
 
-    # pyspark:
-    #   image: jupyter/pyspark-notebook
-    #   container_name: pyspark
-    #   ports:
-    #     - '8888:8888'
-    #     - '4040:4040'
-    #   environment:
-    #     - GRANT_SUDO=yes
-    #   user: root
-    #   # depends_on:
-    #   #   - mongodb
-    #   # - api
-    #   networks:
-    #     - node-network
+  # pyspark:
+  #   image: jupyter/pyspark-notebook
+  #   container_name: pyspark
+  #   ports:
+  #     - '8888:8888'
+  #     - '4040:4040'
+  #   environment:
+  #     - GRANT_SUDO=yes
+  #   user: root
+  #   # depends_on:
+  #   #   - mongodb
+  #   # - api
+  #   networks:
+  #     - node-network
 
 volumes:
   grafana_data:

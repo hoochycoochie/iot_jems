@@ -42,9 +42,9 @@ def receipt(err, msg):
 
 machines = [
     {"machine_id": 1, "product_name": "peugeot 208", "product_category": "vehicule"},
-    {"machine_id": 2, "product_name": "clio 4", "product_category": "vehicule"},
+    # {"machine_id": 2, "product_name": "clio 4", "product_category": "vehicule"},
 ]
-period = 1
+period = 5
 fields = [
     "product_name",
     "product_category",
@@ -87,6 +87,27 @@ def gen_csv():
     print("product_name", product_name)
     print("product_category", product_category)
     rows = [
+        [
+            product_name,
+            product_category,
+            date_time
+            + ":0."
+            + str(datetime.now().microsecond),  # "2018-01-19 05:37:0.612611",
+            random.uniform(5, 8.62),  #  8.62,
+            random.randint(50, 94),  # 94,
+            random.randint(0, 131),  # 131,
+            random.randint(0, 131),  # 131,
+            random.randint(0, 1),  #  0,
+            random.randint(10, 20),  #  20,
+            random.randint(10, 20),  #  20,
+            random.randint(0, 1),  #  0,
+            random.randint(0, 1),  #  0,
+            random.randint(0, 1),  #  0,
+            random.randint(12345, 32826),  #     32826,
+            random.randint(38, 58),  #      58,
+            random.randint(12345, 32826),  #     32826,
+            random.randint(128, 894),  #    894,
+        ],
         [
             product_name,
             product_category,

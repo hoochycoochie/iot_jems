@@ -3,7 +3,7 @@ create_topic:
 delete_topic:
 	docker exec kafka  kafka-topics.sh --delete --zookeeper zookeeper:2181  --topic new_csv_kafka_topic
 compose:
-	docker-compose up --build
+	clear && docker-compose up --build
 volume_db:
 	docker volume create mongo_volume
 
