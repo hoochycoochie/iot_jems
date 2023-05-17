@@ -44,7 +44,7 @@ machines = [
     {"machine_id": 1, "product_name": "peugeot 208", "product_category": "vehicule"},
     {"machine_id": 2, "product_name": "clio 4", "product_category": "vehicule"},
 ]
-period = 5
+period = 1
 fields = [
     "product_name",
     "product_category",

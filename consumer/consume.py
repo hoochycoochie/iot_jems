@@ -1,4 +1,6 @@
 from confluent_kafka import Consumer
+from influxdb import InfluxDBClient
+
 
 # import requests
 
@@ -10,12 +12,21 @@ c = Consumer(
     {
         "bootstrap.servers": HOST,
         "group.id": "python-consumer",
-        # "auto.offset.reset": "earliest",
+        "session.timeout.ms": 6000,
+        "auto.offset.reset": "earliest",
+        "enable.auto.offset.store": False,
     }
 )
+print("c======", c)
 print("Kafka Consumer has been initiated...")
 print("Available topics to consume: ", c.list_topics().topics)
 c.subscribe([TOPIC_NAME])
+
+print("client=======================11111111111111111111&")
+influx_host = "influxdb"
+client = InfluxDBClient(host=influx_host, port=8086)
+client.switch_database("iot_db")
+print("client=======================", client)
 
 
 def main():
